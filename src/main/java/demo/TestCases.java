@@ -1,12 +1,18 @@
 package demo;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
+
+import dev.failsafe.internal.util.Assert;
+
 import java.util.logging.Level;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -48,9 +54,147 @@ public class TestCases {
     
     public  void testCase01(){
         System.out.println("Start Test case: testCase01");
-        driver.get("https://www.google.com");
+        driver.get("https://www.makemytrip.com/");
+        String actualResult = driver.getCurrentUrl();
+        String expectedResult = "https://www.makemytrip.com/";
+        if(actualResult.equals(expectedResult)) {
+            System.out.println("True");
+        } else {
+            System.out.println("False");
+        }
+        System.out.println("end Test case: testCase01");
+    }
+
+    public  void testCase02() throws InterruptedException{
+        System.out.println("Start Test case: testCase02");
+        driver.get("https://www.makemytrip.com/");
+        //click from btn
+        driver.findElement(By.xpath("//label[@for='fromCity']")).click();
+        Thread.sleep(2000);
+        //entering text in to from box
+        WebElement frombox = driver.findElement(By.xpath("//input[@placeholder='From']"));
+        frombox.sendKeys("Banglore");
+        Thread.sleep(2000);
+        //click on banglore location in list
+        WebElement bangloreloc = driver.findElement(By.xpath("//p[text()='Bengaluru, India']"));
+        bangloreloc.click();
+        Thread.sleep(2000);
+        //click to btn
+        driver.findElement(By.xpath("//label[@for='toCity']")).click();
+        Thread.sleep(2000);
+        //entering text in to TO btn
+        WebElement tobox = driver.findElement(By.xpath("//input[@placeholder='To']"));
+        tobox.sendKeys("New Delhi");
+        Thread.sleep(2000);
+        //click on new delhi location in list
+        WebElement delhiloc = driver.findElement(By.xpath("//p[text()='New Delhi, India']"));
+        delhiloc.click();
+        Thread.sleep(2000);
+        //click on JAN20 2024 btn
+        WebElement calendar20Date = driver.findElement(By.xpath("//div[@aria-label='Sat Jan 20 2024']"));
+        calendar20Date.click();
+        Thread.sleep(2000);
+        //click on search btn
+        WebElement searchbtn = driver.findElement(By.xpath("//a[text()='Search']"));
+        searchbtn.click();
+        Thread.sleep(10000);
+        //store the price of the flight and print the value of the price
+        WebElement price = driver.findElement(By.xpath("//div[@class='blackText fontSize18 blackFont white-space-no-wrap clusterViewPrice']"));
+        String pricevalue = price.getText();
+        System.out.println("The price of the flight is " +pricevalue);
         System.out.println("end Test case: testCase02");
     }
+
+
+    public  void testCase03() throws InterruptedException{
+        System.out.println("Start Test case: testCase03");
+        driver.get("https://www.makemytrip.com/");
+        Thread.sleep(4000);
+        //click train btn
+        driver.findElement(By.xpath("//span[text()='Trains']")).click();
+        //click from btn
+        driver.findElement(By.xpath("//label[@for='fromCity']")).click();
+        Thread.sleep(2000);
+        //entering text in to from box
+        WebElement frombox = driver.findElement(By.xpath("//input[@placeholder='From']"));
+        frombox.sendKeys("Banglore");
+        Thread.sleep(2000);
+        //click banglore location in list
+        WebElement bangloreloc = driver.findElement(By.xpath("//span[text()='SBC']"));
+        bangloreloc.click();
+        Thread.sleep(2000);
+        //click to btn
+        // driver.findElement(By.id("toCity"));
+        // Thread.sleep(2000);
+        //entering text into TO box
+        WebElement tobox = driver.findElement(By.xpath("//input[@aria-autocomplete='list']"));
+        tobox.sendKeys("New Delhi");
+        Thread.sleep(2000);
+        //click delhi location in list
+        WebElement delhiloc = driver.findElement(By.xpath("//span[text()='NDLS']"));
+        delhiloc.click();
+        Thread.sleep(2000);
+        //click on JAN20 2024 btn
+        WebElement calendar20Date = driver.findElement(By.xpath("//div[@aria-label='Sat Jan 20 2024']"));
+        calendar20Date.click();
+        Thread.sleep(2000);
+        //click on class dropdown
+        // WebElement classs = driver.findElement(By.xpath("//span[text()='Class']"));
+        // classs.click();
+        //click third AC btn
+        WebElement thirdAc = driver.findElement(By.xpath("//li[text()='Third AC']"));
+        thirdAc.click();
+        //click on search btn
+        WebElement searchbtn = driver.findElement(By.xpath("//a[text()='Search']"));
+        searchbtn.click();
+        Thread.sleep(10000);
+        //store the price of the 3AC train and print the value of the price
+        WebElement price = driver.findElement(By.xpath("//div[@class='ticket-price justify-flex-end']"));
+        String pricevalue = price.getText();
+        System.out.println("The price of the Train 3AC is " +pricevalue);
+        System.out.println("end Test case: testCase03");
+    }
+
+    public  void testCase04() throws InterruptedException{
+        System.out.println("Start Test case: testCase04");
+        driver.get("https://www.makemytrip.com/");
+        Thread.sleep(5000);
+        //click buses btn
+        driver.findElement(By.xpath("//span[text()='Buses']")).click();
+        Thread.sleep(3000);
+        //click from btn
+        driver.findElement(By.xpath("//label[@for='fromCity']")).click();
+        Thread.sleep(2000);
+        //entering text in to from box
+        WebElement frombox = driver.findElement(By.xpath("//input[@placeholder='From']"));
+        frombox.sendKeys("Banglore");
+        Thread.sleep(2000);
+        //click on banglore location in list
+        WebElement bangloreloc = driver.findElement(By.xpath("//span[text()='Bangalore, Karnataka']"));
+        bangloreloc.click();
+        Thread.sleep(2000);
+        WebElement tobox = driver.findElement(By.xpath("//input[@placeholder='To']"));
+        tobox.sendKeys("New Delhi");
+        Thread.sleep(2000);
+        //click on new delhi location in list
+        WebElement delhiloc = driver.findElement(By.xpath("//span[text()='Delhi']"));
+        delhiloc.click();
+        Thread.sleep(2000);
+        //click on JAN20 2024 btn
+        WebElement calendar20Date = driver.findElement(By.xpath("//div[@aria-label='Sat Jan 20 2024']"));
+        calendar20Date.click();
+        Thread.sleep(2000);
+        //click on search btn
+        WebElement searchbtn = driver.findElement(By.id("search_button"));
+        searchbtn.click();
+        Thread.sleep(10000);
+        //verific NO SUCH BUSES ARE FOUND ON 20TH JAN"
+        WebElement verifyTexxt = driver.findElement(By.xpath("//span[text()='No buses found for 20 Jan']"));
+        Boolean text = verifyTexxt.isDisplayed();
+        System.out.println("The text is displayed: " +text);
+        System.out.println("end Test case: testCase04");
+    }
+
 
 
 }
