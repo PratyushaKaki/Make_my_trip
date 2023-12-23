@@ -68,12 +68,13 @@ public class TestCases {
     public  void testCase02() throws InterruptedException{
         System.out.println("Start Test case: testCase02");
         driver.get("https://www.makemytrip.com/");
+        Thread.sleep(4000);
         //click from btn
         driver.findElement(By.xpath("//label[@for='fromCity']")).click();
         Thread.sleep(2000);
         //entering text in to from box
         WebElement frombox = driver.findElement(By.xpath("//input[@placeholder='From']"));
-        frombox.sendKeys("Banglore");
+        frombox.sendKeys("blr");
         Thread.sleep(2000);
         //click on banglore location in list
         WebElement bangloreloc = driver.findElement(By.xpath("//p[text()='Bengaluru, India']"));
@@ -84,7 +85,7 @@ public class TestCases {
         Thread.sleep(2000);
         //entering text in to TO btn
         WebElement tobox = driver.findElement(By.xpath("//input[@placeholder='To']"));
-        tobox.sendKeys("New Delhi");
+        tobox.sendKeys("del");
         Thread.sleep(2000);
         //click on new delhi location in list
         WebElement delhiloc = driver.findElement(By.xpath("//p[text()='New Delhi, India']"));
@@ -92,15 +93,24 @@ public class TestCases {
         Thread.sleep(2000);
         //click on JAN20 2024 btn
         WebElement calendar20Date = driver.findElement(By.xpath("//div[@aria-label='Sat Jan 20 2024']"));
+        WebElement Jan20 = driver.findElement(By.xpath("//div[text()='January 2024']"));
+        String calendartext = Jan20.getText();
+        //String expcalendardate = "20";
+        if(calendartext.contains("January 2024")) {
+            System.out.println("Date is matched");
+        } else {
+            System.out.println("Date is not matched");
+        }
         calendar20Date.click();
+        
         Thread.sleep(2000);
         //click on search btn
         WebElement searchbtn = driver.findElement(By.xpath("//a[text()='Search']"));
         searchbtn.click();
         Thread.sleep(10000);
         //store the price of the flight and print the value of the price
-        WebElement price = driver.findElement(By.xpath("//div[@class='blackText fontSize18 blackFont white-space-no-wrap clusterViewPrice']"));
-        String pricevalue = price.getText();
+        WebElement adult = driver.findElement(By.xpath("//div[@class='blackText fontSize18 blackFont white-space-no-wrap clusterViewPrice']"));
+        String pricevalue = adult.getText();
         System.out.println("The price of the flight is " +pricevalue);
         System.out.println("end Test case: testCase02");
     }
@@ -117,18 +127,15 @@ public class TestCases {
         Thread.sleep(2000);
         //entering text in to from box
         WebElement frombox = driver.findElement(By.xpath("//input[@placeholder='From']"));
-        frombox.sendKeys("Banglore");
+        frombox.sendKeys("ypr");
         Thread.sleep(2000);
         //click banglore location in list
-        WebElement bangloreloc = driver.findElement(By.xpath("//span[text()='SBC']"));
+        WebElement bangloreloc = driver.findElement(By.xpath("//span[text()='YPR']"));
         bangloreloc.click();
         Thread.sleep(2000);
-        //click to btn
-        // driver.findElement(By.id("toCity"));
-        // Thread.sleep(2000);
         //entering text into TO box
         WebElement tobox = driver.findElement(By.xpath("//input[@aria-autocomplete='list']"));
-        tobox.sendKeys("New Delhi");
+        tobox.sendKeys("ndls");
         Thread.sleep(2000);
         //click delhi location in list
         WebElement delhiloc = driver.findElement(By.xpath("//span[text()='NDLS']"));
@@ -136,11 +143,17 @@ public class TestCases {
         Thread.sleep(2000);
         //click on JAN20 2024 btn
         WebElement calendar20Date = driver.findElement(By.xpath("//div[@aria-label='Sat Jan 20 2024']"));
+        WebElement Jan20 = driver.findElement(By.xpath("//div[text()='January 2024']"));
+        String calendartext = Jan20.getText();
+        //String expcalendardate = "20";
+        if(calendartext.contains("January 2024")) {
+            System.out.println("Date is matched");
+        } else {
+            System.out.println("Date is not matched");
+        }
         calendar20Date.click();
+    
         Thread.sleep(2000);
-        //click on class dropdown
-        // WebElement classs = driver.findElement(By.xpath("//span[text()='Class']"));
-        // classs.click();
         //click third AC btn
         WebElement thirdAc = driver.findElement(By.xpath("//li[text()='Third AC']"));
         thirdAc.click();
@@ -167,7 +180,7 @@ public class TestCases {
         Thread.sleep(2000);
         //entering text in to from box
         WebElement frombox = driver.findElement(By.xpath("//input[@placeholder='From']"));
-        frombox.sendKeys("Banglore");
+        frombox.sendKeys("banglore");
         Thread.sleep(2000);
         //click on banglore location in list
         WebElement bangloreloc = driver.findElement(By.xpath("//span[text()='Bangalore, Karnataka']"));
@@ -182,6 +195,14 @@ public class TestCases {
         Thread.sleep(2000);
         //click on JAN20 2024 btn
         WebElement calendar20Date = driver.findElement(By.xpath("//div[@aria-label='Sat Jan 20 2024']"));
+        WebElement Jan20 = driver.findElement(By.xpath("//div[text()='January 2024']"));
+        String calendartext = Jan20.getText();
+        //String expcalendardate = "20";
+        if(calendartext.contains("January 2024")) {
+            System.out.println("Date is matched");
+        } else {
+            System.out.println("Date is not matched");
+        }
         calendar20Date.click();
         Thread.sleep(2000);
         //click on search btn
@@ -190,8 +211,15 @@ public class TestCases {
         Thread.sleep(10000);
         //verific NO SUCH BUSES ARE FOUND ON 20TH JAN"
         WebElement verifyTexxt = driver.findElement(By.xpath("//span[text()='No buses found for 20 Jan']"));
-        Boolean text = verifyTexxt.isDisplayed();
-        System.out.println("The text is displayed: " +text);
+        
+        String actualmessage = verifyTexxt.getText();
+        String expectedmessage = "No buses found for 20 Jan";
+        if(actualmessage.equals(expectedmessage)) {
+            System.out.println("No buses found is Displayed");
+        } else {
+            System.out.println("No buses found is not Displayed");
+        }
+    
         System.out.println("end Test case: testCase04");
     }
 
